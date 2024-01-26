@@ -14,13 +14,13 @@ void print_all(const char * const format, ...)
 {
 	unsigned int i = 0;
 
-	char *separator = "";
+	char *separator = "", *str;
 
 	va_list args;
 
 	va_start(args, format);
 
-	if(format)
+	if (format)
 	{
 		while (format[i])
 		{
@@ -36,31 +36,20 @@ void print_all(const char * const format, ...)
 					printf("%s%f", separator, (float) va_arg(args, double));
 					break;
 				case 's':
-					{
-						char *str =  va_arg(args, char *);
-						if (str == NULL)
-						{
-							printf("(nil)");
-						}
-						else
-						{
-							printf("%s%s", separator, str);
-						}
-					}
-
+					str =  va_arg(args, char *);
+					if (!str)
+						str = "(nil)";
+					printf("%s%s", separator, str);
 					break;
-
+				default:
+						i++;
+						continue;
 			}
 			separator = ", ";
+			i++;
 		}
-
-		i++;
-
 	}
-
 	va_end(args);
-
 	printf("\n");
-
 }
 
