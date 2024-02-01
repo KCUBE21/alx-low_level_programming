@@ -1,6 +1,3 @@
-# 0-print_list.c
-
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
